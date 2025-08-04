@@ -2,18 +2,45 @@
 <html>
 <head>
   <title>Investment Dashboard</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin-top: 50px; }
+    input, button { padding: 10px; margin: 10px; width: 200px; }
+    #dashboard { display: none; }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Your Investment Dashboard</h1>
-  <form>
-    <label for="username">Enter Your Username:</label><br>
-    <input type="text" id="username" name="username" placeholder="e.g. john123"><br><br>
 
-    <label for="balance">Balance:</label><br>
-    <input type="text" id="balance" value="0.00" disabled><br><br>
+  <h2>Client Login</h2>
+  <input type="text" id="username" placeholder="Enter your username">
+  <button onclick="login()">Login</button>
 
-    <label for="status">Withdrawal Status:</label><br>
-    <input type="text" id="status" value="Pending" disabled><br><br>
-  </form>
+  <div id="dashboard">
+    <h3>Welcome, <span id="clientName"></span></h3>
+    <p><strong>Balance:</strong> <span id="balance">Loading...</span></p>
+    <p><strong>Withdrawal Status:</strong> <span id="status">Loading...</span></p>
+  </div>
+
+  <script>
+    const clients = {
+      "client1": { balance: "R$ 10,000", status: "Pending - Fee not paid" },
+      "client2": { balance: "R$ 15,200", status: "Paid" }
+      // You can add more clients like this
+    };
+
+    function login() {
+      const username = document.getElementById('username').value.toLowerCase();
+      const client = clients[username];
+
+      if (client) {
+        document.getElementById('clientName').innerText = username;
+        document.getElementById('balance').innerText = client.balance;
+        document.getElementById('status').innerText = client.status;
+        document.getElementById('dashboard').style.display = 'block';
+      } else {
+        alert("User not found. Contact admin.");
+      }
+    }
+  </script>
+
 </body>
-</html>
+</html>(update dashboard)
